@@ -5,7 +5,7 @@ This project simulates a cash register.A user is asked to enter an item amount. 
 
 This is week 1 [Skill Distillery](http: skilldistillery.com) weekend homework
 
-###Technology Used
+### Technology Used
 * Java
 * Git command line
 * Eclipse
