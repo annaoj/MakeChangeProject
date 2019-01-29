@@ -1,9 +1,7 @@
 package com.skilldistillery.makechange;
 
 public class CashRegister {
-	public double itemPrice, customerMoney, change;
-	public int resTwenties, resTens, resFives, resDollars, resTwentyFiveCents, resTenCents, resFiveCents, resPenny;
-
+	
 	public void printError() {
 		System.out.println("Oops, Error! it's not enough");
 	}
@@ -12,81 +10,90 @@ public class CashRegister {
 		System.out.println("Thank you for your purchase.No change!GoodBye!");
 	}
 
-	public void calculateChange() {
+	public void calculateChange(double itemPrice, double customerMoney) {
 
-		change = customerMoney - itemPrice;
+		int[] changeAmounts;
+		
+		double change = customerMoney - itemPrice;
 
 		double twenties = change / 20;
-		resTwenties = (int) Math.floor(twenties);
+		int resTwenties = (int) Math.floor(twenties);
 
 		double tens = (change % 20) / 10;
-		resTens = (int) Math.floor(tens);
+		int resTens = (int) Math.floor(tens);
 
 		double fives = (change % 20 % 10) / 5;
-		resFives = (int) Math.floor(fives);
+		int resFives = (int) Math.floor(fives);
 
 		double dollars = (change % 20 % 10 % 5);
-		resDollars = (int) Math.floor(dollars);
+		int resDollars = (int) Math.floor(dollars);
 
 		double twentyFiveCents = (change % 20 % 10 % 5 % 1) / 0.25;
-		resTwentyFiveCents = (int) Math.floor(twentyFiveCents);
+		int resTwentyFiveCents = (int) Math.floor(twentyFiveCents);
 
 		double tenCents = (change % 20 % 10 % 5 % 1 % 0.25) / 0.1;
-		resTenCents = (int) Math.floor(tenCents);
+		int resTenCents = (int) Math.floor(tenCents);
 
 		double fiveCents = (change % 20 % 10 % 5 % 1 % 0.25 % 0.1) / 0.05;
-		resFiveCents = (int) Math.floor(fiveCents);
+		int resFiveCents = (int) Math.floor(fiveCents);
 
 		double penny = (change % 20 % 10 % 5 % 1 % 0.25 % 0.1 % 0.05) / 0.01;
-		resPenny = (int) Math.round(penny);
-
-		printResults();
+		int resPenny = (int) Math.round(penny);
+		
+		System.out.print("Amount: " + itemPrice + ", Tendered: " + customerMoney);
+		changeAmounts = new int[]{
+				resTwenties, resTens, 
+				resFives, resDollars, 
+				resTwentyFiveCents, resTenCents,
+				resFiveCents, resPenny	
+		};
+		printResults(changeAmounts);
 
 	}
 
-	public void printResults() {
-		System.out.print("Amount: " + itemPrice + ", Tendered: " + customerMoney);
+	public void printResults(int[] changeAmounts) {
+
 		System.out.println(", Result:  ");
-		if (resTwenties != 0) {
-			System.out.println(resTwenties + " twenty dollar bill, ");
+		if (changeAmounts[0] != 0) {
+			System.out.println(changeAmounts[0] + " twenty dollar bill, ");
 		}
-		if (resTens != 0) {
-			System.out.println(resTens + " ten dollar bill, ");
+		if (changeAmounts[1] != 0) {
+			System.out.println(changeAmounts[1] + " ten dollar bill, ");
 
 		}
-		if (resFives != 0) {
-			System.out.println(resFives + " five dollar bill, ");
+		if (changeAmounts[2] != 0) {
+			System.out.println(changeAmounts[2] + " five dollar bill, ");
 
 		}
-		if (resDollars != 0) {
-			System.out.println(resDollars + " one dollar bill, ");
+		if (changeAmounts[3] != 0) {
+			System.out.println(changeAmounts[3] + " one dollar bill, ");
 
 		}
-		if (resTwentyFiveCents != 0) {
-			if (resTenCents > 1) {
-				System.out.println(resTwentyFiveCents + " quarters, ");
+		if (changeAmounts[4] != 0) {
+			if (changeAmounts[4] > 1) {
+				System.out.println(changeAmounts[4] + " quarters, ");
 			} else {
-				System.out.println(resTwentyFiveCents + " quarter, ");
+				System.out.println(changeAmounts[4] + " quarter, ");
 			}
 
 		}
-		if (resTenCents != 0) {
-			if (resTenCents > 1) {
-				System.out.println(resTenCents + " dimes, ");
+		if (changeAmounts[5] != 0) {
+			if (changeAmounts[5] > 1) {
+				System.out.println(changeAmounts[5] + " dimes, ");
 			} else {
-				System.out.println(resTenCents + " dime, ");
+				System.out.println(changeAmounts[5] + " dime, ");
 			}
 
 		}
-		if (resFiveCents != 0) {
-			System.out.println(resFiveCents + " nickel, ");
+		if (changeAmounts[6] != 0) {
+			System.out.println(changeAmounts[6] + " nickel, ");
 
 		}
-		if (resPenny != 0) {
-			if (resPenny > 1) {
-				System.out.println(resPenny + " pennies.");
+		if (changeAmounts[7] != 0) {
+			if (changeAmounts[7] > 1) {
+				System.out.println(changeAmounts[7] + " pennies.");
 			} else {
-				System.out.println(resPenny + " penny.");
+				System.out.println(changeAmounts[7] + " penny.");
 			}
 
 		}

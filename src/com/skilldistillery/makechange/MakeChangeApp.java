@@ -13,17 +13,17 @@ public class MakeChangeApp {
 		do {
 			System.out.println("What is the price of the item?");
 
-			cr1.itemPrice = kb.nextDouble();
+			double itemPrice = kb.nextDouble();
 
 			System.out.println("How much money was given by customer?");
-			cr1.customerMoney = kb.nextDouble();
+			double customerMoney = kb.nextDouble();
 
-			if (cr1.customerMoney < cr1.itemPrice) {
+			if (customerMoney < itemPrice) {
 				cr1.printError();
-			} else if (cr1.customerMoney == cr1.itemPrice) {
+			} else if (customerMoney == itemPrice) {
 				cr1.printNoChangeMessage();
 			} else {
-				cr1.calculateChange();
+				cr1.calculateChange(itemPrice, customerMoney);
 			}
 
 			System.out.println("Would you like to calculate again?Y for yes or N for exit");
